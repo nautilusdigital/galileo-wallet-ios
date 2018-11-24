@@ -13,7 +13,7 @@ struct LocalCurrencyPair {
 
     func decode(fromData data: Data) throws -> Double {
         do {
-            let coins = try JSONDecoder().decode([[String: String?]].self, from: data).compactMap { $0 as? [String: String] }
+            let coins = try JSONDecoder().decode([[String: String?]].self, from: data).flatMap { $0 as? [String: String] }
 
             if let dict = coins.first, let _price = dict["price_\(currency.paramValue)"] {
                 guard let _double = Double(_price) else {
@@ -50,7 +50,7 @@ struct NanoPricePair {
     
     func decode(fromData data: Data) throws -> Double {
         do {
-            let coins = try JSONDecoder().decode([[String: String?]].self, from: data).compactMap { $0 as? [String: String] }
+            let coins = try JSONDecoder().decode([[String: String?]].self, from: data).flatMap { $0 as? [String: String] }
 
             if let dict = coins.filter({$0["symbol"]?.lowercased() == "nano"}).first, let _price = dict["price_\(currency.paramValue)"] {
                 guard let _double = Double(_price) else {

@@ -105,7 +105,7 @@ final class SendViewController: UIViewController {
         let addressTextView = SendAddressTextView()
         addressTextView.delegate = self
         addressTextView.inputAccessoryView = keyboardAccessoryView()
-        addressTextView.placeholder = "Enter a Nano Address"
+        addressTextView.placeholder = "Enter a Galileo Address"
         if let toAddress = viewModel.toAddress {
             addressTextView.togglePlaceholder(show: false)
             addressTextView.attributedText = addAttributes(forAttributedText: toAddress.longAddressWithColor)

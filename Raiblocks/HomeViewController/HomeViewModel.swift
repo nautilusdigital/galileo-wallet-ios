@@ -183,7 +183,7 @@ final class HomeViewModel {
         NotificationCenter.default.addObserver(self, selector: #selector(appWasReopened(_:)), name: Notification.Name(rawValue: "ReestablishConnection"), object: nil)
 
         socket.event.open = {
-//            print("socket opened")
+            print("socket opened")
             self._hasNetworkConnection.value = true
 
             self.socket.sendMultiple(endpoints: [
@@ -196,12 +196,12 @@ final class HomeViewModel {
             AnalyticsEvent.socketClosedHome.track(customAttributes: ["code": code, "reason": reason])
 
             self._hasNetworkConnection.value = false
-            // print("CONNECTION WAS CLOSED")
+            print("CONNECTION WAS CLOSED")
         }
 
         socket.event.error = { error in
             AnalyticsEvent.socketErrorHome.track(customAttributes: ["error": error.localizedDescription])
-            // print("error \(error)")
+            print("error \(error)")
         }
 
         self.socket.event.message = { message in
@@ -402,9 +402,9 @@ final class HomeViewModel {
         self.accountHistory = accountHistory
 
         // Find new transactions, if any, and insert into `transactions` appropriately
-        let newTransactions: [NanoTransaction] = accountHistory.transactions.compactMap { txn in
+        let newTransactions: [NanoTransaction] = accountHistory.transactions.flatMap { txn in
             guard let hash = txn.hash else { return nil }
-            let hashes = self.transactions.value.compactMap { $0.hash }
+            let hashes = self.transactions.value.flatMap { $0.hash }
 
             return hashes.contains(hash) ? nil : .finished(txn)
         }

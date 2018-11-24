@@ -45,9 +45,9 @@ class PriceViewController: UIViewController {
                     formatter.locale = CurrencyService().localCurrency().locale
 
                     if let balance = formatter.string(from: nanoBalance.rawAsUsableAmount) {
-                        self.priceLabel?.text = "\(balance) NANO"
+                        self.priceLabel?.text = "\(balance) GALILEO"
                     } else {
-                        self.priceLabel?.text = "0 NANO"
+                        self.priceLabel?.text = "0 GALILEO"
                     }
             }
 
@@ -132,7 +132,7 @@ class PriceViewController: UIViewController {
     private func setDefaultValue() {
         switch type {
         case .nano:
-            self.priceLabel?.text = "0 NANO"
+            self.priceLabel?.text = "0 GALILEO"
         case .btc:
             self.priceLabel?.text = "\(Currency.btc.mark) 0"
         case .localCurrency:

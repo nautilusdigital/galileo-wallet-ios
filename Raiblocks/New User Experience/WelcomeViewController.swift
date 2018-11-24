@@ -32,7 +32,7 @@ class WelcomeViewController: UIViewController {
 
         let welcomeLabel = UILabel()
         welcomeLabel.font = Styleguide.Fonts.nunitoLight.font(ofSize: 20)
-        welcomeLabel.text = "Welcome to Nano Wallet"
+        welcomeLabel.text = "Welcome to Galileo Wallet"
         welcomeLabel.textColor = Styleguide.Colors.darkBlue.color
         view.addSubview(welcomeLabel)
         constrain(welcomeLabel) {
@@ -107,7 +107,7 @@ class WelcomeViewController: UIViewController {
         versionLabel.font = Styleguide.Fonts.nunitoRegular.font(ofSize: 14)
         versionLabel.text =
         """
-        Nano Wallet Company, LLC.
+        Galileo Wallet Company, LLC.
         v\(version) (\(build))
         """
         view.addSubview(versionLabel)
@@ -264,7 +264,7 @@ extension WelcomeViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         // Pastes an address
         if (Address(text)) != nil || text.contains("_") {
-            showAlertForBadSeed(message: "It looks like you've entered a Nano Address rather than a Wallet Seed.\n\nEnter your Wallet Seed to try again.")
+            showAlertForBadSeed(message: "It looks like you've entered a Galileo Address rather than a Wallet Seed.\n\nEnter your Wallet Seed to try again.")
 
             return false
         }
@@ -275,7 +275,7 @@ extension WelcomeViewController: UITextViewDelegate {
             if (Address(text) != nil || text.contains("_")) {
                 AnalyticsEvent.badWalletSeedPasted.track(customAttributes: ["error_type": "Address pasted"])
 
-                showAlertForBadSeed(message: "It looks like you've entered a Nano Address rather than a Wallet Seed.\n\nEnter your Wallet Seed to try again.")
+                showAlertForBadSeed(message: "It looks like you've entered a Galileo Address rather than a Wallet Seed.\n\nEnter your Wallet Seed to try again.")
 
                 return false
             } else {
