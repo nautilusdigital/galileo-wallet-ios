@@ -32,11 +32,15 @@ final class TransactionTableViewCell: UITableViewCell {
 
             let formatter = NumberFormatter()
             formatter.numberStyle = .decimal
-            formatter.maximumFractionDigits = isiPhoneSE() ? 7 : 10
+            formatter.maximumFractionDigits = 2
+            formatter.minimumFractionDigits = 2
             formatter.locale = CurrencyService().localCurrency().locale
-
+            
+            let galFormatter = viewModel.address?.shortString
+            
+            
             self.amountLabel?.text = formatter.string(from: viewModel.amount) ?? "0"
-            self.addressLabel?.attributedText = viewModel.address?.shortAddressWithColor
+            self.addressLabel?.text = galFormatter?.replacingOccurrences(of: "xrb", with: "gal")
             self.nanoCurrencySymbol?.image = viewModel.type == .send ? UIImage(named: "nanoCurrencyMarkBlue") : UIImage(named: "nanoCurrencyMarkGrey")
         }
     }
