@@ -41,7 +41,8 @@ class PriceViewController: UIViewController {
                 .startWithValues { nanoBalance in
                     let formatter = NumberFormatter()
                     formatter.numberStyle = .decimal
-                    formatter.maximumFractionDigits = 10
+                    formatter.maximumFractionDigits = 2
+                    formatter.minimumFractionDigits = 2
                     formatter.locale = CurrencyService().localCurrency().locale
 
                     if let balance = formatter.string(from: nanoBalance.rawAsUsableAmount) {
