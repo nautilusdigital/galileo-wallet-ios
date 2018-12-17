@@ -14,17 +14,27 @@ import UIKit.UIColor
     private let value: String
 
     init?(_ address: String) {
-        guard RaiCore().walletAddressIsValid(address) else { return nil }
-
-        self.value = address
+        
+        //first we validate if is a valid galileo address
+        if address.starts(with: "gal_") && address.count == 64 {
+            self.value = address
+        }
+        else //is not a galileo address
+        {
+            guard RaiCore().walletAddressIsValid(address) else { return nil }
+            
+            self.value = address
+        }
+        
     }
 
     var hasXrbAddressFormat: Bool {
-        return value.contains("xrb_")
+        
+        return value.contains("xrb_") || value.contains("gal_")
     }
 
     var hasNanoAddressFormat: Bool {
-        return value.contains("nano_")
+        return value.contains("nano_") || value.contains("gal_")
     }
 
     var shortString: String {
@@ -68,9 +78,9 @@ import UIKit.UIColor
     }
 
     var longAddressWithColorOnDarkBG: NSAttributedString {
-        let string = NSMutableAttributedString(string: value)
+        let string = NSMutableAttributedString(string: value.replacingOccurrences(of: "xrb", with: "gal"))
         string.addAttribute(.foregroundColor, value: UIColor.white, range: NSMakeRange(0, string.length))
-
+        
         let frontRange = NSMakeRange(0, hasXrbAddressFormat ? 9 : 10)
         let backRange = NSMakeRange(string.length - 5, 5)
 

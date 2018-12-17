@@ -104,7 +104,7 @@ final class SendViewController: UIViewController {
 
         let addressTextView = SendAddressTextView()
         addressTextView.delegate = self
-        addressTextView.inputAccessoryView = keyboardAccessoryView()
+        //addressTextView.inputAccessoryView = keyboardAccessoryView()
         addressTextView.placeholder = "Enter a Galileo Address"
         if let toAddress = viewModel.toAddress {
             addressTextView.togglePlaceholder(show: false)
@@ -124,20 +124,22 @@ final class SendViewController: UIViewController {
 
         let priceSection = UIView()
         priceSection.backgroundColor = Styleguide.Colors.lightBlue.color
+        
         view.addSubview(priceSection)
         constrain(priceSection, addressTextView) {
             $0.width == $0.superview!.width
             $0.top == $1.bottom
-            $0.height == (isiPhoneSE() ? CGFloat(100) : CGFloat(140))
+            $0.height == (isiPhoneSE() ? CGFloat(50) : CGFloat(70))
         }
 
         let nanoTextField = SendTextField()
         nanoTextField.delegate = self
         nanoTextField.textAlignment = .center
+        
         priceSection.addSubview(nanoTextField)
         constrain(nanoTextField) {
             $0.top == $0.superview!.top
-            $0.height == $0.superview!.height * CGFloat(0.5)
+            $0.height == $0.superview!.height * CGFloat(1)
             $0.width == $0.superview!.width
         }
         self.nanoTextField = nanoTextField
@@ -164,7 +166,7 @@ final class SendViewController: UIViewController {
             $0.height == CGFloat(29)
         }
 
-        let border = UIView()
+        /*let border = UIView()
         border.backgroundColor = UIColor.white.withAlphaComponent(0.25)
         priceSection.addSubview(border)
         constrain(border) {
@@ -190,6 +192,7 @@ final class SendViewController: UIViewController {
             $0.height == $0.superview!.height * CGFloat(0.5)
         }
         self.localCurrencyTextField = localCurrencyTextField
+        */
 
         // MARK: - Bottom Section
 
@@ -493,9 +496,12 @@ final class SendViewController: UIViewController {
             subtractor = viewModel.nanoAmount.value.asRawValue
             remainingBalance = viewModel.sendableNanoBalance.subtracting(subtractor)
         }
-
+        
+        //as the transactions are really made with original xrb prefix, we need to chage galileo prefix to xrb
+        let xrbAddress = Address(textView.attributedText.string.replacingOccurrences(of: "gal_", with: "xrb_"))
+        
         let endpoint = Endpoint.createStateBlock(
-            type: .send(destinationAddress: address),
+            type: .send(destinationAddress: xrbAddress!),
             previous: viewModel.previousFrontierHash!,
             remainingBalance: remainingBalance.stringValue,
             work: work,
@@ -546,7 +552,7 @@ final class SendViewController: UIViewController {
                         case LAError.authenticationFailed:
                             return self.showError(title: "There was a problem", message: "Please try again.")
                         case LAError.passcodeNotSet:
-                            return self.showError(title: "Passcode Not Set", message: "Please set a passcode for your phone to send Nano (and for security reasons, in general).")
+                            return self.showError(title: "Passcode Not Set", message: "Please set a passcode for your phone to send Galileo (and for security reasons, in general).")
                         default:
                             return self.showError(title: "There was a problem", message: "Please try again.")
                         }
@@ -579,7 +585,7 @@ final class SendViewController: UIViewController {
     private func keyboardAccessoryView() -> UIToolbar {
         let accessoryView = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 50))
         accessoryView.barStyle = .default
-        let xrbItem = UIBarButtonItem(title: "xrb_", style: .plain, target: self, action: #selector(addXRBAddressPrefix))
+        let xrbItem = UIBarButtonItem(title: "gal_", style: .plain, target: self, action: #selector(addXRBAddressPrefix))
         let nanoItem = UIBarButtonItem(title: "nano_", style: .plain, target: self, action: #selector(addNanoAddressPrefix))
         [xrbItem].forEach { $0.tintColor = .black }
         accessoryView.items = [xrbItem, nanoItem]
@@ -715,7 +721,7 @@ extension SendViewController: UITextViewDelegate {
             return true
         }
 
-        let validCharacters = ["a","b","c","d","e","f","g","h","i","j","k","m","n","o","p","q","r","s","t","u","w","x","y","z","1","3","4","5","6","7","8","9", "_"]
+        let validCharacters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","w","x","y","z","1","3","4","5","6","7","8","9", "_"]
 
         let isValidCharacter = validCharacters.contains(text.lowercased())
         if self.addressTextView!.text.count >= 0, isValidCharacter {

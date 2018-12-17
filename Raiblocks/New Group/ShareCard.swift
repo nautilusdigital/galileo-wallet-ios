@@ -35,7 +35,7 @@ class ShareCard: UIView {
         }
 
         let qrCode = EFQRCode.generate(
-            content: address.longAddress,
+            content: address.longAddress.replacingOccurrences(of: "xrb", with: "gal"),
             backgroundColor: UIColor.white.coreImageColor,
             foregroundColor: Styleguide.Colors.darkBlue.color.coreImageColor,
             watermark: UIImage(named: "largeNanoMarkBlue")?.cgImage,
@@ -65,16 +65,14 @@ class ShareCard: UIView {
         }
 
         let logo = UIImageView(image: UIImage(named: "nanologo"))
+        logo.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+        logo.contentMode = .scaleAspectFit
         rightView.addSubview(logo)
-        constrain(logo) {
-            $0.top == $0.superview!.top
-            $0.left == $0.superview!.left
-        }
-
+        
         let nanoLabel = UILabel()
         nanoLabel.textColor = .white
         nanoLabel.font = Styleguide.Fonts.nunitoLight.font(ofSize: 27)
-        let text = NSMutableAttributedString(string: "NANO")
+        let text = NSMutableAttributedString(string: "GALILEO")
         text.addAttribute(.kern, value: 4.0, range: NSMakeRange(0, text.length))
         nanoLabel.attributedText = text
 
@@ -105,7 +103,7 @@ class ShareCard: UIView {
         }
 
         let cashtag = UILabel()
-        cashtag.text = "$nano"
+        cashtag.text = "$galileo"
         if isiPhoneSE() {
             cashtag.font = Styleguide.Fonts.notoSansRegular.font(ofSize: 14)
         } else {
@@ -119,7 +117,7 @@ class ShareCard: UIView {
         }
 
         let website = UILabel()
-        website.text = "nano.org"
+        website.text = "galileocoin.com"
         if isiPhoneSE() {
             website.font = Styleguide.Fonts.notoSansRegular.font(ofSize: 14)
         } else {

@@ -24,7 +24,11 @@ class HomeViewController: UIViewController {
     // MARK: - UI Elements
 
     private weak var pricePageViewController: PricePageViewController?
-    private weak var pageControl: UIPageControl?
+    private weak var pageControl: UIPageControl? {
+        didSet {
+            pageControl?.isHidden = true
+        }
+    }
     private weak var refreshControl: UIRefreshControl?
     private weak var tableView: UITableView?
     private weak var sendButton: NanoButton?
@@ -354,7 +358,7 @@ extension HomeViewController: UITableViewDelegate {
 
     private func showExplorerAlert(forIndexPath indexPath: IndexPath) {
         let ac = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        ac.addAction(UIAlertAction(title: "Send Nano to Address", style: .default) { _ in
+        ac.addAction(UIAlertAction(title: "Send Galileo to Address", style: .default) { _ in
             let vc = SendViewController(viewModel: SendViewModel(homeSocket: self.viewModel.socket, toAddress: self.viewModel.transactions.value[indexPath.row].fromAddress))
             vc.delegate = self
 

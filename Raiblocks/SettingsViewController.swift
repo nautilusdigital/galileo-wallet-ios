@@ -116,7 +116,7 @@ final class SettingsViewController: UIViewController {
             $0.bottom == $1.bottom
         }
 
-        let viewOnExplorerButton = SettingsButton()
+        /*let viewOnExplorerButton = SettingsButton()
         viewOnExplorerButton.setTitle("View Account on Explorer", for: .normal)
         viewOnExplorerButton.addTarget(self, action: #selector(viewOnExplorer(_:)), for: .touchUpInside)
         view.addSubview(viewOnExplorerButton)
@@ -124,12 +124,12 @@ final class SettingsViewController: UIViewController {
             $0.width == $1.width
             $0.height == CGFloat(66)
             $0.top == $1.bottom
-        }
+        }*/
 
         let divider4 = UIView()
         divider4.backgroundColor = UIColor.black.withAlphaComponent(0.2)
         view.addSubview(divider4)
-        constrain(divider4, viewOnExplorerButton) {
+        constrain(divider4, divider2) {
             $0.height == CGFloat(1)
             $0.width == $1.width
             $0.bottom == $1.bottom
