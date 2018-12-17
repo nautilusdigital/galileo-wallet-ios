@@ -365,7 +365,7 @@ extension HomeViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(vc, animated: true)
         })
 
-        ac.addAction(UIAlertAction(title: "View Transaction on Explorer", style: .default) { _ in self.view(atIndexPath: indexPath) })
+        //ac.addAction(UIAlertAction(title: "View Transaction on Explorer", style: .default) { _ in self.view(atIndexPath: indexPath) })
 
         ac.addAction(UIAlertAction(title: "Copy Address", style: .default) { _ in
             if let address = self.viewModel.transactions.value[indexPath.row].fromAddress {

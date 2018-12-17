@@ -35,7 +35,7 @@ class ShareCard: UIView {
         }
 
         let qrCode = EFQRCode.generate(
-            content: address.longAddress.replacingOccurrences(of: "xrb", with: "gal"),
+            content: address.longAddressGal,
             backgroundColor: UIColor.white.coreImageColor,
             foregroundColor: Styleguide.Colors.darkBlue.color.coreImageColor,
             watermark: UIImage(named: "largeNanoMarkBlue")?.cgImage,
@@ -83,7 +83,7 @@ class ShareCard: UIView {
         }
 
         let addressLabel = UILabel()
-        let addressText =  NSMutableAttributedString(attributedString: address.longAddressWithColorOnDarkBG)
+        let addressText =  NSMutableAttributedString(attributedString: address.longAddressWithColorOnDarkBGGal)
         addressLabel.numberOfLines = 0
         addressLabel.lineBreakMode = .byCharWrapping
         if isiPhoneSE() {

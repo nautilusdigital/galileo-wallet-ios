@@ -108,7 +108,7 @@ final class SendViewController: UIViewController {
         addressTextView.placeholder = "Enter a Galileo Address"
         if let toAddress = viewModel.toAddress {
             addressTextView.togglePlaceholder(show: false)
-            addressTextView.attributedText = addAttributes(forAttributedText: toAddress.longAddressWithColor)
+            addressTextView.attributedText = addAttributes(forAttributedText: toAddress.longAddressWithColorGal)
             sendAddressIsValid.value = true
         }
         view.addSubview(addressTextView)
@@ -498,10 +498,8 @@ final class SendViewController: UIViewController {
         }
         
         //as the transactions are really made with original xrb prefix, we need to chage galileo prefix to xrb
-        let xrbAddress = Address(textView.attributedText.string.replacingOccurrences(of: "gal_", with: "xrb_"))
-        
         let endpoint = Endpoint.createStateBlock(
-            type: .send(destinationAddress: xrbAddress!),
+            type: .send(destinationAddress: address),
             previous: viewModel.previousFrontierHash!,
             remainingBalance: remainingBalance.stringValue,
             work: work,
@@ -671,7 +669,7 @@ extension SendViewController: UITextViewDelegate {
         if let address = Address(textView.text) {
             textView.text = ""
 
-            textView.attributedText = addAttributes(forAttributedText: address.longAddressWithColor)
+            textView.attributedText = addAttributes(forAttributedText: address.longAddressWithColorGal)
 
             self.sendAddressIsValid.value = true
             // TODO: make sure address is not mine too

@@ -84,7 +84,7 @@ class ReceiveViewController: UIViewController {
         }
 
         let qr = EFQRCode.generate(
-            content: viewModel.address.longAddress.replacingOccurrences(of: "xrb", with: "gal"),
+            content: viewModel.address.longAddressGal,
             backgroundColor: UIColor.white.coreImageColor,
             foregroundColor: Styleguide.Colors.darkBlue.color.coreImageColor,
             watermark: UIImage(named: "largeNanoMarkBlue")?.cgImage,
@@ -125,7 +125,7 @@ class ReceiveViewController: UIViewController {
         }
 
         let addressLabel = UILabel()
-        addressLabel.attributedText = viewModel.address.longAddressWithColorOnDarkBG
+        addressLabel.attributedText = viewModel.address.longAddressWithColorOnDarkBGGal
         addressLabel.numberOfLines = 10
         addressLabel.textAlignment = .center
         addressLabel.lineBreakMode = .byCharWrapping
@@ -170,7 +170,7 @@ class ReceiveViewController: UIViewController {
     @objc func copyAddress() {
         AnalyticsEvent.nanoAddressCopied.track()
 
-        UIPasteboard.general.string = viewModel.address.longAddress.replacingOccurrences(of: "xrb", with: "gal")
+        UIPasteboard.general.string = viewModel.address.longAddressGal
 
         let ac = UIAlertController(title: "Your Galileo Address Has Been Copied", message: "Share it with a friend to receive Galileo!", preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "Done", style: .default))
