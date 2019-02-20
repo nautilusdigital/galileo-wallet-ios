@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>socketServerURL</key>
-	<string>ws://node-001.galileocoin.com:8081</string>
+	<string>wss://node-001.galileocoin.com</string>
 	<key>keychainID</key>
 	<string>io.Realm.NanoWalletiOS</string>
 </dict>

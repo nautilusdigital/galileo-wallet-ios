@@ -261,16 +261,16 @@ class HomeViewController: UIViewController {
 
     private func showAlertWhenOffline(endRefreshing: Bool = false) {
         let ac = UIAlertController(title: "You are offline", message: """
-            Nano Wallet is having trouble connecting to the network right now.
+            Galileo Wallet is having trouble connecting to the network right now.
 
             Please try again.
         """, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "View Account on Nanode", style: .default) { _ in
+        /*ac.addAction(UIAlertAction(title: "View Account on Galileo", style: .default) { _ in
             guard let url = URL(string: "https://www.nanode.co/account/" + self.address.longAddress) else { return }
 
             self.present(WebViewController(url: url, useForLegalPurposes: false), animated: true, completion: nil)
 
-        })
+        })*/
         ac.addAction(UIAlertAction(title: "Dismiss", style: .cancel) { _ in
             if endRefreshing {
                 self.refreshControl?.endRefreshing()
@@ -438,7 +438,7 @@ extension HomeViewController: TransactionTableViewCellDelegate {
     func cellWasLongPressed(address: Address) {
         UIPasteboard.general.string = address.longAddress
 
-        let ac = UIAlertController(title: "Address Copied", message: "\(address.longAddress) was copied.", preferredStyle: .actionSheet)
+        let ac = UIAlertController(title: "Address Copied", message: "\(address.longAddressGal) was copied.", preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "Okay", style: .default))
 
         present(ac, animated: true)

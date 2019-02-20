@@ -183,7 +183,7 @@ class ReceiveViewController: UIViewController {
 
         var activityItems: [Any] = []
 
-        activityItems = [viewModel.address.longAddress]
+        activityItems = [viewModel.address.longAddressGal]
 
         let shareCard = ShareCard(address: viewModel.address)
         let margin: CGFloat = 20

@@ -526,7 +526,7 @@ final class SendViewController: UIViewController {
         var error: NSError?
 
         if context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-            let reason = "Send \(amount) Nano?"
+            let reason = "Send \(amount) Galileo?"
 
             context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { [unowned self] success, error in
                 DispatchQueue.main.async {
