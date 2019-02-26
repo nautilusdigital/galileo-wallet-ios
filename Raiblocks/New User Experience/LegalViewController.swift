@@ -262,7 +262,7 @@ final class LegalViewController: UIViewController {
             "date": dateString
         ])
 
-        let vc = WebViewController(url: URL(string: "https://galileocoin.com/ios-eula")!, useForLegalPurposes: true, agreement: .eula)
+        let vc = WebViewController(url: URL(string: "https://wallet.galileocoin.com/android-eula-galileo.html")!, useForLegalPurposes: true, agreement: .eula)
         vc.delegate = self
         present(vc, animated: true)
     }
@@ -273,7 +273,7 @@ final class LegalViewController: UIViewController {
             "date": dateString
         ])
 
-        let vc = WebViewController(url: URL(string: "https://galileocoin.com/mobile-privacy-policy")!, useForLegalPurposes: true, agreement: .privacyPolicy)
+        let vc = WebViewController(url: URL(string: "https://wallet.galileocoin.com/privacy-policy-galileo.html")!, useForLegalPurposes: true, agreement: .privacyPolicy)
         vc.delegate = self
         present(vc, animated: true)
     }

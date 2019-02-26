@@ -102,7 +102,7 @@ class WebViewController: UIViewController {
             #if DEBUG
             acceptButton.isEnabled = true
             #else
-            acceptButton.isEnabled = false
+            acceptButton.isEnabled = true
             #endif
             view.addSubview(acceptButton)
             constrain(acceptButton) {

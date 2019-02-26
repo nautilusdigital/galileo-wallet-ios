@@ -246,11 +246,11 @@ final class SettingsViewController: UIViewController {
     }
 
     @objc func viewEula() {
-        self.present(WebViewController(url: URL(string: "https://nanowalletcompany.com/ios-eula")!, useForLegalPurposes: false), animated: true)
+        self.present(WebViewController(url: URL(string: "https://wallet.galileocoin.com/android-eula-galileo.html")!, useForLegalPurposes: false), animated: true)
     }
 
     @objc func viewPrivacyPolicy() {
-        self.present(WebViewController(url: URL(string: "https://nanowalletcompany.com/mobile-privacy-policy")!, useForLegalPurposes: false), animated: true)
+        self.present(WebViewController(url: URL(string: "https://wallet.galileocoin.com/privacy-policy-galileo.html")!, useForLegalPurposes: false), animated: true)
     }
 
     @objc func viewOnExplorer(_ sender: UIButton) {
@@ -345,7 +345,7 @@ final class SettingsViewController: UIViewController {
     }
 
     @objc func logOut() {
-        let ac = UIAlertController(title: "Are you sure you want to log out?", message: "Logging out will remove your Wallet Seed, keys and all of your Nano-related data from this device.", preferredStyle: .actionSheet)
+        let ac = UIAlertController(title: "Are you sure you want to log out?", message: "Logging out will remove your Wallet Seed, keys and all of your Galileo-related data from this device.", preferredStyle: .actionSheet)
         ac.addAction(UIAlertAction(title: "Log Out", style: .destructive) { _ in
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "LogOut"), object: nil)
         })
