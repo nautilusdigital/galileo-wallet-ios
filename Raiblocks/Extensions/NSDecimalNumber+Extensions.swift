@@ -11,7 +11,7 @@ import Foundation
 extension NSDecimalNumber {
 
     var rawAsUsableAmount: NSDecimalNumber {
-        let divider = NSDecimalNumber(mantissa: 1, exponent: 30, isNegative: false)
+        let divider = NSDecimalNumber(mantissa: 1, exponent: 24, isNegative: false)
         return self.dividing(by: divider)
     }
 
@@ -46,7 +46,7 @@ extension NSDecimalNumber {
     }
 
     var asRawValue: NSDecimalNumber {
-        return self.multiplying(byPowerOf10: 30)
+        return self.multiplying(byPowerOf10: 24)
     }
 
     /// Transform a human-readable value like 10.0 into its raw equivilant
